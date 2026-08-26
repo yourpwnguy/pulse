@@ -1,0 +1,42 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+
+# Debug
+*.dSYM/
+core
+vgcore.*
+
+# Coverage
+*.profraw
+*.profdata
+
+# Project-specific (development files, not for release)
+instructions.md
+MASCOT_DESIGN.md
+doki_demo.py
+doki_preview.py
+tests
