@@ -28,7 +28,7 @@ use crate::triage::Priority;
 #[command(
     name = "pulse",
     version,
-    about = "Find out which dependency problems are worth fixing, and fix the safe ones.",
+    about = "A triage-first security tool that turns a wall of CVEs into a prioritized plan.",
     long_about = "pulse checks your locked dependencies against the OSV advisory \
 database and sorts what it finds by what is actually worth doing: whether a patch \
 exists, how big the upgrade is, and whether you own the dependency directly.\n\n\
