@@ -28,12 +28,11 @@ use crate::triage::Priority;
 #[command(
     name = "pulse",
     version,
-    about = "A triage-first security tool that turns a wall of CVEs into a prioritized plan.",
-    long_about = "pulse checks your locked dependencies against the OSV advisory \
-database and sorts what it finds by what is actually worth doing: whether a patch \
-exists, how big the upgrade is, and whether you own the dependency directly.\n\n\
+    about = "A triage-first security tool that turns a wall of CVEs into a prioritized plan with severity ratings, fix effort estimates, and ready-to-run commands.",
+    long_about = "pulse scans your locked dependencies for known vulnerabilities, \
+ranks them by severity and fixability, and hands you the exact commands to resolve them.\n\n\
 Run with no arguments to scan the current directory. Add --fix to apply every \
-upgrade that cannot break your build."
+safe upgrade automatically."
 )]
 pub struct Cli {
     /// Directories or lockfiles to scan
