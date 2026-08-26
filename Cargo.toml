@@ -2,7 +2,7 @@
 name = "pulse"
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.74"
+rust-version = "1.85"
 description = "Triage known vulnerabilities in your dependency tree: what to fix, in what order, and why."
 license = "MIT"
 repository = "https://github.com/yourpwnguy/pulse"

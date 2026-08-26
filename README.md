@@ -3,7 +3,7 @@
   <h4>dependency vulnerability triage that doesn't suck</h4>
   <br>
   <a href="https://github.com/yourpwnguy/pulse">
-    <img src="https://img.shields.io/badge/rust-1.74+-ff9e64?labelColor=1C2325&style=for-the-badge">
+    <img src="https://img.shields.io/badge/rust-1.85+-ff9e64?labelColor=1C2325&style=for-the-badge">
   </a>
   <a href="https://github.com/yourpwnguy/pulse/issues">
     <img src="https://img.shields.io/github/issues/yourpwnguy/pulse?color=ff9e64&labelColor=1C2325&style=for-the-badge">
