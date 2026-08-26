@@ -3,7 +3,7 @@
   <h4>dependency vulnerability triage that doesn't suck</h4>
   <br>
   <a href="https://github.com/yourpwnguy/pulse">
-    <img src="https://img.shields.io/badge/rust-1.85+-ff9e64?labelColor=1C2325&style=for-the-badge">
+    <img src="https://img.shields.io/badge/rust-1.88+-ff9e64?labelColor=1C2325&style=for-the-badge">
   </a>
   <a href="https://github.com/yourpwnguy/pulse/issues">
     <img src="https://img.shields.io/github/issues/yourpwnguy/pulse?color=ff9e64&labelColor=1C2325&style=for-the-badge">
@@ -49,7 +49,7 @@ The report shows you exactly what to run. No guessing, no reading 47 separate ad
 
 ```bash
 git clone https://github.com/yourpwnguy/pulse.git
-cd pulse/v0.1.0
+cd pulse/
 cargo install --path .
 ```
 
