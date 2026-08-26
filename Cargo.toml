@@ -1,0 +1,46 @@
+[package]
+name = "pulse"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.74"
+description = "Triage known vulnerabilities in your dependency tree: what to fix, in what order, and why."
+license = "MIT"
+repository = "https://github.com/yourpwnguy/pulse"
+readme = "README.md"
+keywords = ["security", "vulnerability", "dependencies", "cargo", "audit"]
+categories = ["command-line-utilities", "development-tools"]
+
+
+# Self-contained workspace so this crate builds independently of the
+# reference implementation living in the parent directory.
+[workspace]
+
+[dependencies]
+# CLI surface.
+clap = { version = "4", features = ["derive"] }
+# Lockfile + OSV wire deserialization, and the `--format json` report.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+# Correct semver ordering for OSV range matching. Hand-rolling this is
+# how you ship wrong remediation advice, so it gets a dependency.
+semver = { version = "1", features = ["serde"] }
+# Blocking HTTP. No async runtime for a program that makes a handful of
+# requests and then exits.
+ureq = { version = "2", features = ["json"] }
+# Recursive lockfile discovery with directory pruning.
+walkdir = "2"
+# Correct terminal column widths. A CJK glyph occupies two cells while
+# counting as one `char`, so character-count padding misaligns a table just
+# as surely as byte-count padding does. Aligned output is a claim about the
+# terminal, so it needs the terminal's notion of width.
+unicode-width = "0.2"
+# Actual terminal width. Hardcoding 76 columns wasted most of a modern terminal
+# and forced vertical scrolling for content that had room to sit side by side.
+terminal_size = "0.4"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
