@@ -1,0 +1,58 @@
+# Fixture: a small app whose transitive tree contains a real advisory
+# (chrono 0.4.19 → time 0.1.44, RUSTSEC-2020-0071).
+version = 3
+
+[[package]]
+name = "vulnerable-app"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "serde",
+]
+
+[[package]]
+name = "chrono"
+version = "0.4.20"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "670ad68c9088c99a1f9c2b9a6e5b3b32b52ba15d4d9c0c0e0a1b0e0d0c0b0a09"
+dependencies = [
+ "libc",
+ "num-integer",
+ "time",
+]
+
+[[package]]
+name = "time"
+version = "0.1.44"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255"
+dependencies = [
+ "libc",
+]
+
+[[package]]
+name = "libc"
+version = "0.2.150"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "89d92a4743f9a61002fae18374ed11e1d3ccadf1cb42c8d5e60c1cf1ac2c1b1c"
+
+[[package]]
+name = "num-integer"
+version = "0.1.45"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "225d3389fb3509a24c93f5c29eb6bde2586b98d9f016636dff58d7c6f7569cd9"
+
+[[package]]
+name = "serde"
+version = "1.0.200"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1111111111111111111111111111111111111111111111111111111111111111"
+
+[[package]]
+name = "local-helper"
+version = "0.1.0"
+
+[[package]]
+name = "forked-thing"
+version = "0.3.0"
+source = "git+https://github.com/example/forked-thing#abc123def456"
