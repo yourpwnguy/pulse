@@ -365,7 +365,7 @@ fn parse_lenient(raw: &str) -> Option<Version> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::domain::{Provenance, Rating};
+    use crate::domain::{Ecosystem, Provenance, Rating};
 
     fn package(name: &str, version: &str) -> Package {
         Package::new(Ecosystem::CratesIo, name, Version::parse(version).unwrap())
