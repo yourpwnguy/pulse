@@ -36,7 +36,7 @@ use crate::render::layout::Layout;
 use crate::render::line::{truncate, Line};
 use crate::render::mascot::{self, Mood};
 use crate::render::panel::{Board, Stat};
-use crate::render::style::{Style, FAINT, GOLD, MINT, SKY};
+use crate::render::style::{Style, FAINT, GOLD, MINT, ROSE, SKY};
 
 /// Cell width of a progress bar.
 const BAR: usize = 12;
@@ -73,11 +73,11 @@ pub(crate) fn compose(shared: &Arc<Shared>, frame: usize, style: Style) -> Vec<L
     let mut counts: Vec<Stat> = Vec::new();
     for (stage, summary) in &done {
         if matches!(stage, Stage::Parse | Stage::Query) {
-            counts.push(Stat::new(summary.clone(), crate::render::style::SKY));
+            counts.push(Stat::new(summary.clone(), SKY));
         }
     }
     if counts.is_empty() {
-        counts.push(Stat::new("starting up", crate::render::style::SKY));
+        counts.push(Stat::new("starting up", SKY));
     }
 
     // The bar mirrors how far through the pipeline we are, so the board itself shows
@@ -110,7 +110,7 @@ pub(crate) fn compose(shared: &Arc<Shared>, frame: usize, style: Style) -> Vec<L
     // eight, which is what keeps the whole live view on one screen.
     let saying = match current {
         Some(stage) => stage.saying(),
-        None if done.len() == Stage::all().len() => "all done — here is what I found",
+        None if done.len() == Stage::all().len() => "all done \u{2014} here is what I found",
         None => "waking up…",
     };
 
@@ -124,7 +124,7 @@ pub(crate) fn compose(shared: &Arc<Shared>, frame: usize, style: Style) -> Vec<L
             .pad_to(3 + mascot::BODY_WIDTH + 4);
         if row == 1 {
             line = line
-                .paint(style, crate::render::style::ROSE, mascot::heartbeat(frame))
+                .paint(style, ROSE, mascot::heartbeat(frame))
                 .plain(" ")
                 .dim(style, saying);
         }
@@ -213,8 +213,8 @@ fn headline(done: &[(Stage, String)], current: Option<Stage>) -> String {
 
 /// An indeterminate bar: a highlight sweeping back and forth.
 ///
-/// Deliberately not a partially filled bar — that would depict progress which is
-/// not happening.
+/// Deliberately not a partially filled bar (that would depict progress which is
+/// not happening).
 fn sweep(line: Line, frame: usize, style: Style) -> Line {
     let period = BAR * 2 - 2;
     let step = frame % period;
@@ -229,7 +229,7 @@ fn sweep(line: Line, frame: usize, style: Style) -> Line {
         let colour = if i == position {
             GOLD
         } else if i.abs_diff(position) == 1 {
-            crate::render::style::ROSE
+            ROSE
         } else {
             FAINT
         };
