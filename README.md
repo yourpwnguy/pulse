@@ -26,7 +26,7 @@ Because `cargo audit` tells you what's wrong but not what to do about it.
 
 I have a project with 300 dependencies. I run `cargo audit` and it spits out a wall of CVEs. Cool. Now what? Do I fix them all? Which ones actually matter? Which ones can I fix with one command versus which ones require rewriting half my codebase?
 
-That's the problem pulse solves. It doesn't just find vulnerabilities — it tells you the order to fix them, how hard each one is, and exactly which command to run. One finding, one command, done.
+That's the problem pulse solves. It doesn't just find vulnerabilities - it tells you the order to fix them, how hard each one is, and exactly which command to run. One finding, one command, done.
 
 ---
 
@@ -34,10 +34,10 @@ That's the problem pulse solves. It doesn't just find vulnerabilities — it tel
 
 pulse reads your `Cargo.lock`, queries the OSV database, and builds a triage report. Every finding gets sorted into one of four buckets:
 
-- **fix now** — high impact, patch available, run this command
-- **when you can** — patch exists but lower priority
-- **blocked upstream** — no patch yet, watch this issue
-- **worth knowing** — informational, not a real vulnerability
+- **fix now** - high impact, patch available, run this command
+- **when you can** - patch exists but lower priority
+- **blocked upstream** - no patch yet, watch this issue
+- **worth knowing** - informational, not a real vulnerability
 
 The report shows you exactly what to run. No guessing, no reading 47 separate advisories to figure out which `cargo update` actually helps.
 
@@ -119,10 +119,10 @@ pulse doesn't just check your direct dependencies. It walks the entire dependenc
 
 Not all vulnerabilities are equal. pulse considers:
 
-- **Severity** — CVSS score when available
-- **Fix availability** — is there a patched version?
-- **Effort** — can you upgrade with `cargo update` or does it require a breaking change?
-- **Ownership** — is this your direct dependency or transitive?
+- **Severity** - CVSS score when available
+- **Fix availability** - is there a patched version?
+- **Effort** - can you upgrade with `cargo update` or does it require a breaking change?
+- **Ownership** - is this your direct dependency or transitive?
 
 A critical vulnerability with an easy fix gets priority over a medium one with no patch.
 
@@ -179,7 +179,7 @@ While scanning, pulse shows a live terminal animation with Doki the cat. It blin
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the technical details. The short version:
 
 - Pure functional core, impure shell
-- No async runtime — blocking HTTP is fine for 3 requests
+- No async runtime - blocking HTTP is fine for 3 requests
 - OSV is the only network dependency
 - Everything else is parsing and pure logic
 
@@ -187,11 +187,11 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the technical details. The short vers
 
 ## Current limitations
 
-**Cargo only** — Rust is the ecosystem I work in. Adding npm, pip, or go support would require different lockfile parsers and advisory sources. Not impossible, just not what I needed.
+**Cargo only** - Rust is the ecosystem I work in. Adding npm, pip, or go support would require different lockfile parsers and advisory sources. Not impossible, just not what I needed.
 
-**No reachability analysis** — pulse tells you if a package is vulnerable, not if your code actually calls the vulnerable function. That's a much harder problem that requires call graph analysis.
+**No reachability analysis** - pulse tells you if a package is vulnerable, not if your code actually calls the vulnerable function. That's a much harder problem that requires call graph analysis.
 
-**Single advisories source** — uses OSV. The RustSec advisory database is the most comprehensive for Rust, and OSV includes it. If you need NVD or other sources, that would be a separate integration.
+**Single advisories source** - uses OSV. The RustSec advisory database is the most comprehensive for Rust, and OSV includes it. If you need NVD or other sources, that would be a separate integration.
 
 ---
 
@@ -219,7 +219,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the technical details. The short vers
 
 ## Why "pulse"?
 
-A security tool should have a pulse. The name is literal — there's a heartbeat animation while it scans. Also, "pulse" is short, memorable, and wasn't taken on crates.io.
+A security tool should have a pulse. The name is literal - there's a heartbeat animation while it scans. Also, "pulse" is short, memorable, and wasn't taken on crates.io.
 
 ---
 
