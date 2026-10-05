@@ -207,9 +207,9 @@ impl Mood {
     /// The eyes-and-mouth cluster, without the `(=` `=)` frame.
     ///
     /// An explicit table rather than a slice of [`Mood::face`]. Slicing that string
-    /// by byte offset split the multi-byte `˶` cheeks — a panic waiting for the
+    /// by byte offset split the multi-byte `˶` cheeks (a panic waiting for the
     /// first person to open the live view, and the exact bug class this crate has
-    /// been removing everywhere else. A test keeps the two tables in step.
+    /// been removing everywhere else). A test keeps the two tables in step.
     pub fn eyes(self) -> &'static str {
         match self {
             Mood::Idle => "˶•ω•˶",
@@ -258,7 +258,7 @@ pub fn busy(frame: usize) -> Mood {
 /// A scrolling ECG trace.
 ///
 /// A tool named `pulse` should have one. The trace is a repeating cardiac
-/// waveform — flat baseline, a sharp spike, a small echo, then rest — scrolled one
+/// waveform (flat baseline, a sharp spike, a small echo, then rest) scrolled one
 /// cell per frame. Motion plus an uneven rhythm is what reads as *alive*; a
 /// uniform bar reads as a machine.
 pub fn wave(frame: usize, cells: usize) -> String {
@@ -388,7 +388,7 @@ mod tests {
     /// The mood's dialogue has to match the situation it was chosen for.
     ///
     /// Regression: `from_report` used to return `Happy` after two fixes, and
-    /// `Happy` says "doki feels safe here" — which appeared on screen while four
+    /// `Happy` says "doki feels safe here" (which appeared on screen while four
     /// issues were still open.
     #[test]
     fn never_claims_safety_while_issues_remain() {
@@ -496,7 +496,7 @@ mod tests {
     fn no_mood_scolds_the_user() {
         for mood in ALL {
             let line = mood.line();
-            // Blink, wink, and glance are visual animations — no dialogue expected.
+            // Blink, wink, and glance are visual animations (no dialogue expected).
             if !matches!(mood, Mood::Blink | Mood::Wink | Mood::Glance) {
                 assert!(!line.is_empty());
             }

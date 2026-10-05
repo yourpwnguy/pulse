@@ -1,4 +1,4 @@
-//! The live scan — motion while pulse works.
+//! The live scan: motion while pulse works.
 //!
 //! A tool that prints nothing for two seconds reads as *frozen*, and first
 //! contact is where users are lost. This narrates the same two seconds: a HUD, an
@@ -47,7 +47,7 @@ const REGION: usize = 24;
 ///
 /// An enum rather than strings so the pipeline and the renderer cannot disagree
 /// about what exists, and so `all()` can render the not-yet-started steps greyed
-/// out — an unfinished list is what keeps you watching.
+/// out (an unfinished list is what keeps you watching).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Stage {
     Discover,

@@ -23,8 +23,8 @@
 //! ## Height invariant
 //!
 //! The frame is always exactly `REGION` rows (24). If a frame grows taller,
-//! the bottom rows are silently truncated — that's how a completed stage ends
-//! up with no tick against it. The `debug_assert!` catches this during
+//! the bottom rows are silently truncated (that's how a completed stage ends
+//! up with no tick against it). The `debug_assert!` catches this during
 //! development.
 
 use std::sync::Arc;

@@ -9,7 +9,7 @@
 //!    command without being told to.
 //! 2. **Context is quiet.** `SLATE` carries roughly 60% of the report. Making
 //!    the background genuinely dim is what allows the few bright things to feel
-//!    bright — cuteness comes from contrast, not from saturating everything.
+//!    bright (cuteness comes from contrast, not from saturating everything).
 //!
 //! | colour | role | why this hue |
 //! |---|---|---|

@@ -163,8 +163,8 @@ mod tests {
 
         assert_eq!(coloured.width(), 5);
         assert_eq!(plain.width(), 5);
-        // The coloured string is longer in bytes but identical in width — which
-        // is precisely the trap this type removes.
+        // The coloured string is longer in bytes but identical in width (which
+        // is precisely the trap this type removes).
         assert!(coloured.to_string().len() > plain.to_string().len());
     }
 
