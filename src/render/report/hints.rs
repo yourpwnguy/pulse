@@ -5,7 +5,7 @@
 //! A security tool that hides its own limits manufactures confidence, which is
 //! worse than reporting nothing. Caveats state plainly what was not checked
 //! (git/path dependencies), what was not rated (unrated severities), and what
-//! was skipped (excluded projects). These are not warnings — they're facts about
+//! was skipped (excluded projects). These are not warnings, they are facts about
 //! the scan's coverage.
 //!
 //! ## Hints
@@ -71,10 +71,10 @@ pub(crate) fn caveats(
         out,
         "{}",
         Line::indent(2)
-      .paint(style, GOLD, "!")
-      .plain(" ")
-      // indent(2) + "! " is a four-column prefix, so the budget is room(4).
-      .dim(style, &truncate(&notes.join(" · "), layout.room(4)))
+            .paint(style, GOLD, "!")
+            .plain(" ")
+            // indent(2) + "! " is a four-column prefix, so the budget is room(4).
+            .dim(style, &truncate(&notes.join(" · "), layout.room(4)))
     )?;
     Ok(())
 }

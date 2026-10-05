@@ -34,8 +34,8 @@ pub(crate) fn action(
         format!("fixes {count} of {}", headline.issues)
     };
 
-    // The command is the one thing that must never be truncated — it has to stay
-    // copy-pasteable. If the payoff will not fit beside it, the payoff moves down.
+    // The command is the one thing that must never be truncated (it has to stay
+    // copy-pasteable). If the payoff will not fit beside it, the payoff moves down.
     let command = truncate(&command, layout.body().saturating_sub(2));
     let mut line = Line::indent(2)
         .bold(style, GOLD, "▸ ")

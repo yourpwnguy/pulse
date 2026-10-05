@@ -14,8 +14,8 @@
 //! Findings are grouped by package: four advisories in one crate are one
 //! `cargo update`. The group shows the highest fix among the members, so that
 //! single upgrade clears all of them. This is the key insight that makes the
-//! report actionable — you don't need to read 47 individual entries, you need
-//! to run 3 commands.
+//! report actionable (you don't need to read 47 individual entries, you need
+//! to run 3 commands).
 
 use std::io::Write;
 
