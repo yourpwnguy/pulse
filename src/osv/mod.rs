@@ -142,17 +142,18 @@ impl Client {
         for (index, ids) in hits {
             let package = &packages[index];
             let mut matched: Vec<Advisory> = ids
-        .iter()
-        .filter_map(|id| details.get(id))
-        .filter_map(|vulnerability| vulnerability.to_advisory(package))
-        // OSV already filtered by version, but we re-check locally so
-        // that a mis-parsed range shows up as a missing finding rather
-        // than a confidently wrong one.
-        .filter(|advisory| {
-          advisory.affected.intervals.is_empty() && advisory.affected.versions.is_empty()
-            || advisory.affected.contains(&package.version)
-        })
-        .collect();
+                .iter()
+                .filter_map(|id| details.get(id))
+                .filter_map(|vulnerability| vulnerability.to_advisory(package))
+                // OSV already filtered by version, but we re-check locally so
+                // that a mis-parsed range shows up as a missing finding rather
+                // than a confidently wrong one.
+                .filter(|advisory| {
+                    advisory.affected.intervals.is_empty()
+                        && advisory.affected.versions.is_empty()
+                        || advisory.affected.contains(&package.version)
+                })
+                .collect();
 
             if matched.is_empty() {
                 continue;
