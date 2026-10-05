@@ -2,7 +2,7 @@
 //!
 //! Exists because "3 projects" is not an answer to "*which* three?". When a tool
 //! scans by walking the filesystem, the set it chose is a fact the user needs to
-//! be able to audit — otherwise a typo'd path or an over-broad `--exclude`
+//! be able to audit (otherwise a typo'd path or an over-broad `--exclude`
 //! silently shrinks the scan and nothing looks wrong.
 //!
 //! Makes no network calls, so it is instant.
@@ -45,7 +45,7 @@ pub fn render(
             Line::indent(2).dim(
                 style,
                 &truncate(
-                    "no Cargo.lock found — is this the right directory?",
+                    "no Cargo.lock found \u{2014} is this the right directory?",
                     layout.room(2)
                 )
             )
@@ -105,7 +105,7 @@ pub fn render(
             "{}",
             row.dim(
                 style,
-                &truncate(&format!("skipped — {}", entry.reason), space)
+                &truncate(&format!("skipped \u{2014} {}", entry.reason), space)
             )
         )?;
     }
