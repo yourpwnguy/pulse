@@ -1,6 +1,6 @@
 [package]
 name = "pulse"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.88"
 description = "A triage-first security tool that turns a wall of CVEs into a prioritized plan with severity ratings, fix effort estimates, and ready-to-run commands"
