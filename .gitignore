@@ -40,3 +40,4 @@ doki_demo.py
 doki_preview.py
 sess_*
 session-*.md
+.opencode/
