@@ -1,6 +1,6 @@
 //! The stats board.
 //!
-//! A rounded panel of real numbers. No mascot inside it — Doki lives beside the
+//! A rounded panel of real numbers. No mascot inside it (Doki lives beside the
 //! work, where there is room for the full character.
 //!
 //! ## Why it is capped
@@ -15,10 +15,10 @@
 //!
 //! Reading order matches decision order:
 //!
-//! 1. **counts** — how much is there, and how much can I act on
-//! 2. **the bar** — how much of it is one command away
-//! 3. **severity and age** — how bad, and how long
-//! 4. **scope and movement** — what was examined, and what changed
+//! 1. **counts** (how much is there, and how much can I act on)
+//! 2. **the bar** (how much of it is one command away)
+//! 3. **severity and age** (how bad, and how long)
+//! 4. **scope and movement** (what was examined, and what changed)
 //!
 //! Every row goes through [`Board::row`], which pads to a width the board
 //! computed. There is a test asserting the result is a rectangle at every

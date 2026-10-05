@@ -77,7 +77,7 @@ impl Reason {
         match self {
             Reason::Pinned => {
                 format!(
-                    "{package} did not move (a version requirement in Cargo.toml is capping it)"
+                    "{package} did not move \u{2014} a version requirement in Cargo.toml is capping it"
                 )
             }
             Reason::Msrv { needs } => {

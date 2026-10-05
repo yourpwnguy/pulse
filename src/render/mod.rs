@@ -2,7 +2,7 @@
 //!
 //! Rendering is strictly downstream of triage: nothing here decides anything, it
 //! only formats decisions already made. That is why the JSON and human renderers
-//! cannot disagree about severity or priority — neither of them computes either.
+//! cannot disagree about severity or priority (neither of them computes either).
 
 mod json;
 pub mod layout;
@@ -73,7 +73,7 @@ pub fn nothing_to_fix(out: &mut dyn Write, layout: Layout, style: Style) -> Resu
             .dim(
                 style,
                 &line::truncate(
-                    "nothing here can be upgraded safely — what is left needs you",
+                    "nothing here can be upgraded safely \u{2014} what is left needs you",
                     layout.room(14)
                 )
             )
@@ -81,7 +81,7 @@ pub fn nothing_to_fix(out: &mut dyn Write, layout: Layout, style: Style) -> Resu
     Ok(())
 }
 
-/// Reports what `--fix` did, and — crucially — what it did *not* manage.
+/// Reports what `--fix` did, and (crucially) what it did *not* manage.
 ///
 /// Anything that did not reach the patched version is reported as still
 /// vulnerable, with the reason. Claiming a fix that did not land is the worst
