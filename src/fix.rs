@@ -77,7 +77,7 @@ impl Reason {
         match self {
             Reason::Pinned => {
                 format!(
-                    "{package} did not move — a version requirement in Cargo.toml is capping it"
+                    "{package} did not move (a version requirement in Cargo.toml is capping it)"
                 )
             }
             Reason::Msrv { needs } => {
@@ -292,13 +292,13 @@ fn attempt(upgrade: &Upgrade) -> (Outcome, bool) {
 fn locked_version(root: &Path, package: &str) -> Option<Version> {
     let project = crate::lockfile::cargo::parse(&root.join("Cargo.lock")).ok()?;
     project
-    .packages
-    .iter()
-    .filter(|p| p.package.name == package)
-    .map(|p| p.package.version.clone())
-    // Several versions of one crate can coexist; the highest is the one an
-    // upgrade was trying to reach.
-    .max()
+        .packages
+        .iter()
+        .filter(|p| p.package.name == package)
+        .map(|p| p.package.version.clone())
+        // Several versions of one crate can coexist; the highest is the one an
+        // upgrade was trying to reach.
+        .max()
 }
 
 /// Tries `cargo add package@version` to update the Cargo.toml requirement.
@@ -382,7 +382,7 @@ fn msrv_hint(stderr: &str) -> Option<String> {
 /// A bare `1.82`-style version token, with surrounding punctuation removed.
 ///
 /// Rejects anything carrying a `v` prefix, which is how cargo writes *crate*
-/// versions — the distinction that made the first attempt at this wrong.
+/// versions (the distinction that made the first attempt at this wrong).
 fn as_version(token: &str) -> Option<String> {
     if token.starts_with('v') {
         return None;
