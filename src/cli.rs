@@ -4,10 +4,10 @@
 //! there because it answers a question a person actually has. Three earlier flags
 //! were removed rather than kept for symmetry:
 //!
-//! * `--no-rewards` — there are no rewards any more. The XP/level/streak display
+//! * `--no-rewards` (there are no rewards any more: the XP/level/streak display
 //!   it hid was a scoreboard about the work rather than a view of it.
-//! * `--no-history` — history is now just the baseline for *"2 fixed since
-//!   Tuesday"*. Turning it off removed information and gained nothing, so it is
+//! * `--no-history` (history is now just the baseline for *"2 fixed since
+//!   Tuesday"*: turning it off removed information and gained nothing, so it is
 //!   folded into `--no-save`, which is about not *writing*.
 //! * `--fail-on` kept its outcome-word values (`urgent`/`fixable`/`anything`/
 //!   `never`) because an earlier threshold-style version read backwards:
@@ -43,7 +43,7 @@ pub struct Cli {
     /// Apply every safe upgrade, then re-scan to show the result
     ///
     /// Runs `cargo update` for each semver-compatible fix. Breaking changes are
-    /// never applied automatically — those stay your decision.
+    /// never applied automatically (those stay your decision).
     #[arg(long, verbatim_doc_comment, help_heading = "Fixing")]
     pub fix: bool,
 
