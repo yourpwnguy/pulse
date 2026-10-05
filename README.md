@@ -176,7 +176,7 @@ While scanning, pulse shows a live terminal animation with Doki the cat. It blin
 
 ## Architecture
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the technical details. The short version:
+See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for the technical details. The short version:
 
 - Pure functional core, impure shell
 - No async runtime - blocking HTTP is fine for 3 requests

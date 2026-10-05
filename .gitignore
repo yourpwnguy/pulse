@@ -38,3 +38,5 @@ instructions.md
 MASCOT_DESIGN.md
 doki_demo.py
 doki_preview.py
+sess_*
+session-*.md
