@@ -62,20 +62,6 @@ impl Rating {
         }
     }
 
-    /// The palette entry this rating should be drawn in.
-    ///
-    /// Lives beside the rating rather than in the renderer so the two cannot drift
-    /// apart, and so a new rating cannot be added without deciding how it looks.
-    pub fn colour_hint(self) -> crate::render::style::Colour {
-        use crate::render::style::{CORAL, KIN, SKY, SLATE};
-        match self {
-            Rating::Critical | Rating::High => CORAL,
-            Rating::Medium => KIN,
-            Rating::Low | Rating::None => SKY,
-            Rating::Unknown => SLATE,
-        }
-    }
-
     pub fn as_str(self) -> &'static str {
         match self {
             Rating::Critical => "critical",

@@ -12,7 +12,7 @@ use crate::triage::Finding;
 
 use crate::render::layout::Layout;
 use crate::render::line::{truncate, Line};
-use crate::render::style::{Style, GOLD, IRIS, MINT, SKY, SLATE};
+use crate::render::style::{severity_colour, Style, GOLD, IRIS, MINT, SKY, SLATE};
 
 /// Lines of advisory prose shown by `--full` before deferring to the URL.
 ///
@@ -122,7 +122,7 @@ impl Group<'_> {
             }
         }
 
-        let (next, placed) = fits(head, &impact, worst.colour_hint(), name_col + 10);
+        let (next, placed) = fits(head, &impact, severity_colour(worst), name_col + 10);
         head = next;
         if !placed {
             overflow.push(impact.clone());
@@ -183,7 +183,7 @@ impl Group<'_> {
                 row = row
                     .paint(
                         style,
-                        finding.severity.rating.colour_hint(),
+                        severity_colour(finding.severity.rating),
                         &severity(finding),
                     )
                     .pad_to(18);

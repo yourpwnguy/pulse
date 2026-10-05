@@ -14,7 +14,7 @@ use crate::render::layout::Layout;
 use crate::render::line::{truncate, Line};
 use crate::render::mascot::{self, Mood};
 use crate::render::panel::{stat, Board};
-use crate::render::style::Style;
+use crate::render::style::{severity_colour, Style};
 
 /// Renders the header panel with stats, Doki mascot, and movement text.
 pub(crate) fn header(
@@ -26,7 +26,7 @@ pub(crate) fn header(
     layout: Layout,
     style: Style,
 ) -> Result<()> {
-    let worst_colour = headline.worst_rating.colour_hint();
+    let worst_colour = severity_colour(headline.worst_rating);
 
     // Row 1: how much, and how much of it you can act on.
     let mut counts = Vec::new();

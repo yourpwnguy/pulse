@@ -2,7 +2,7 @@
 //!
 //! Everything in here is pure data plus the logic that belongs to it. Nothing in
 //! this module reads a file or opens a connection, which is what makes the
-//! interesting logic — version-range matching, CVSS scoring, prioritisation —
+//! interesting logic (version-range matching, CVSS scoring, prioritisation)
 //! testable without fixtures, mocks, or a network.
 
 pub mod advisory;

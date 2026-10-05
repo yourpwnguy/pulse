@@ -15,11 +15,11 @@
 //! |---|---|---|
 //! | `ROSE` #FF5FA2 | pulse itself, Doki, the heartbeat | vivid magenta-pink: the brand, used nowhere functional |
 //! | `BLUSH` #FFA8D4 | Doki's softer moods, gentle accents | the same hue lightened, so mascot states feel related |
-//! | `KIN` #FFC86B | **the action** — commands, XP, rewards | warm gold reads as "valuable", and nothing competes |
+//! | `KIN` #FFC86B | **the action** (commands, XP, rewards) | warm gold reads as "valuable", and nothing competes |
 //! | `MINT` #4FE3B0 | fixed, safe, resolved | the only green: unambiguous success |
 //! | `CORAL` #FF6B7A | urgent | red-adjacent but soft enough not to feel like a crash |
 //! | `IRIS` #A78BFA | blocked, not your move | cool violet reads as "waiting", not "wrong" |
-//! | `SKY` #7DD3FC | facts — versions, identifiers, evidence | cold and neutral, never emotional |
+//! | `SKY` #7DD3FC | facts (versions, identifiers, evidence) | cold and neutral, never emotional |
 //! | `SLATE` #6B7280 | everything else | genuinely recessive |
 //!
 //! Two invariants, both enforced by tests:
@@ -113,13 +113,7 @@ impl Style {
     /// Severity keeps its own scale, separate from priority: severity is *how
     /// bad*, priority is *what to do*, and conflating them is how reports mislead.
     pub fn severity(self, rating: Rating, text: &str) -> String {
-        let colour = match rating {
-            Rating::Critical | Rating::High => CORAL,
-            Rating::Medium => KIN,
-            Rating::Low | Rating::None => SKY,
-            Rating::Unknown => SLATE,
-        };
-        self.paint(colour, text)
+        self.paint(severity_colour(rating), text)
     }
 
     pub fn priority(self, priority: Priority, text: &str) -> String {
@@ -141,6 +135,18 @@ impl Style {
             Effort::Breaking => IRIS,
         };
         self.paint(colour, text)
+    }
+}
+
+/// The colour for a severity rating, kept here so domain stays free of
+/// rendering concerns. This is the single place that decides how a rating
+/// looks, so a new rating cannot be added without picking its colour.
+pub fn severity_colour(rating: Rating) -> Colour {
+    match rating {
+        Rating::Critical | Rating::High => CORAL,
+        Rating::Medium => KIN,
+        Rating::Low | Rating::None => SKY,
+        Rating::Unknown => SLATE,
     }
 }
 
