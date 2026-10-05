@@ -1,4 +1,4 @@
-//! pulse — triage known vulnerabilities in a dependency tree.
+//! pulse: triage known vulnerabilities in a dependency tree.
 //!
 //! # Layering
 //!
@@ -18,7 +18,7 @@
 //! ```
 //!
 //! The shape is "functional core, imperative shell". All the logic worth getting
-//! right — CVSS scoring, version-range matching, prioritisation — is a pure
+//! right (CVSS scoring, version-range matching, prioritisation) is a pure
 //! function over owned values, so its tests need no network, no temporary
 //! directories, and no mocking. I/O is pushed to two leaf modules that contain
 //! no decisions.
@@ -120,11 +120,11 @@ pub fn run(
         let live = render::Live::start(options.style);
         let progress = live.reporter();
 
-        let projects = discover_projects(paths, &progress)?;
-        let (projects, skipped) = partition(projects, &options.exclude, &history.ignored_projects);
-
         // `--projects` is pure discovery: no network call.
         if options.list_projects {
+            let projects = discover_projects(paths, &progress)?;
+            let (projects, skipped) =
+                partition(projects, &options.exclude, &history.ignored_projects);
             drop(live);
             render::projects(out, &projects, &skipped, options.layout, options.style)?;
             if ignore_changed && options.history {
@@ -133,16 +133,7 @@ pub fn run(
             return Ok(Outcome::Pass);
         }
 
-        // One request covers every project: the same crate at the same version in
-        // ten repositories is one query, not ten.
-        let packages = unique_packages(&projects);
-        let advisories = osv::Client::new(options.cache).advisories(&packages, &progress)?;
-
-        let mut report = triage_with_progress(&projects, &advisories, &progress);
-        if !options.show_notes {
-            report = without_notes(report);
-        }
-        report.skipped_projects = skipped;
+        let (report, projects) = scan_once(paths, options, &history, &progress)?;
         (report, projects)
     };
 
@@ -171,17 +162,8 @@ pub fn run(
             // Re-read the lockfiles: they changed underneath us.
             let live = render::Live::start(options.style);
             let progress = live.reporter();
-            let projects = discover_projects(paths, &progress)?;
-            let (projects, skipped) =
-                partition(projects, &options.exclude, &history.ignored_projects);
-            let packages = unique_packages(&projects);
-            let advisories = osv::Client::new(options.cache).advisories(&packages, &progress)?;
-
-            report = triage_with_progress(&projects, &advisories, &progress);
-            if !options.show_notes {
-                report = without_notes(report);
-            }
-            report.skipped_projects = skipped;
+            let (rescanned, _) = scan_once(paths, options, &history, &progress)?;
+            report = rescanned;
             drop(live);
 
             delta = progress::compare(&history, &report, today);
@@ -221,6 +203,33 @@ fn persist_ignores(history: &History) {
     if let Err(error) = stored.write() {
         eprintln!("pulse: note: could not save ignore list: {error}");
     }
+}
+
+/// One full scan: discover, query, triage. Used for the initial scan and the
+/// post-fix rescan, which were the same dozen lines written twice.
+///
+/// The `--projects` path does not use this: it stops after discovery and
+/// never touches the network.
+fn scan_once(
+    paths: &[std::path::PathBuf],
+    options: &Options,
+    history: &History,
+    progress: &render::Reporter,
+) -> Result<(Report, Vec<Project>)> {
+    let projects = discover_projects(paths, progress)?;
+    let (projects, skipped) = partition(projects, &options.exclude, &history.ignored_projects);
+
+    // One request covers every project: the same crate at the same version in
+    // ten repositories is one query, not ten.
+    let packages = unique_packages(&projects);
+    let advisories = osv::Client::new(options.cache).advisories(&packages, progress)?;
+
+    let mut report = triage_with_progress(&projects, &advisories, progress);
+    if !options.show_notes {
+        report = without_notes(report);
+    }
+    report.skipped_projects = skipped;
+    Ok((report, projects))
 }
 
 /// Discovery and parsing, narrated.
@@ -421,7 +430,7 @@ fn partition(
 /// Whether a project matches any pattern, and which one.
 ///
 /// Case-insensitive substring match against the project name or its lockfile
-/// path — forgiving enough to type from memory. `--projects` exists so the effect
+/// path (forgiving enough to type from memory). `--projects` exists so the effect
 /// of a pattern can be checked before anyone relies on it.
 fn matching<'a>(project: &Project, patterns: &'a [String]) -> Option<&'a String> {
     let name = project.name.to_ascii_lowercase();
@@ -457,8 +466,8 @@ fn load_projects(paths: &[std::path::PathBuf]) -> Result<Vec<Project>> {
 
 /// Makes project names unique.
 ///
-/// Two directories can easily produce the same project name — a crate and a
-/// vendored copy of itself, or `foo/` and `archive/foo/`. That is not merely
+/// Two directories can easily produce the same project name (a crate and a
+/// vendored copy of itself, or `foo/` and `archive/foo/`). That is not merely
 /// confusing in the report: a finding's identity is `project|package|advisory`,
 /// so duplicate names would collide in the triage de-duplicator and in the
 /// progress file, silently merging two different projects' findings into one.
