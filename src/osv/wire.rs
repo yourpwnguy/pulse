@@ -11,9 +11,7 @@
 use semver::Version;
 use serde::{Deserialize, Serialize};
 
-use crate::domain::{
-    Advisory, AffectedInterval, AffectedRange, Bound, Ecosystem, Package, Severity,
-};
+use crate::domain::{Advisory, AffectedInterval, AffectedRange, Bound, Package, Severity};
 
 // ─── Request ────────────────────────────────────────────────────────────────
 
@@ -274,8 +272,6 @@ impl Affected {
             Some(eco) => {
                 let base = eco.split(':').next().unwrap_or(eco);
                 base.eq_ignore_ascii_case(package.ecosystem.as_osv())
-                    || matches!(package.ecosystem, Ecosystem::CratesIo)
-                        && base.eq_ignore_ascii_case("crates.io")
             }
             None => true,
         };
