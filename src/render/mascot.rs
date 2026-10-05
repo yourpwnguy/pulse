@@ -1,4 +1,4 @@
-//! Doki — the cat who watches your dependencies.
+//! Doki: the cat who watches your dependencies.
 //!
 //! One face, many expressions, always exactly [`CELLS`] columns wide so it can sit
 //! inside a bordered panel without making the border ragged.
@@ -88,13 +88,13 @@ impl Mood {
         }
     }
 
-    /// What Doki says. Short, warm, never scolding — a tool that makes you feel
-    /// told off gets closed once and not reopened.
+    /// What Doki says. Short, warm, never scolding (a tool that makes you feel
+    /// told off gets closed once and not reopened).
     pub fn line(self) -> &'static str {
         match self {
             Mood::Cheer => "you cleared a whole batch!",
             Mood::Love => "you fixed something, nice",
-            Mood::Purr => "nothing left to fix — doki is pleased",
+            Mood::Purr => "nothing left to fix \u{2014} doki is pleased",
             Mood::Happy => "doki feels safe here",
             Mood::Idle => "just some housekeeping",
             Mood::Think => "found a little work for later",
