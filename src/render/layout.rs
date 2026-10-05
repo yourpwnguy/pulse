@@ -1,4 +1,4 @@
-//! Layout — how wide things are allowed to be.
+//! Layout: how wide things are allowed to be.
 //!
 //! The previous renderer hardcoded 76 columns. On an 80-column terminal that is
 //! merely tight; on the 200-column terminal most people actually use it wastes
@@ -34,13 +34,13 @@ impl Layout {
         // layout testable inside a pty, and it lets someone pin the width for
         // reproducible output without having to redirect.
         let columns = std::env::var("COLUMNS")
-      .ok()
-      .and_then(|v| v.trim().parse::<usize>().ok())
-      .filter(|w| *w > 0)
-      .or_else(|| terminal_size().map(|(Width(w), _)| usize::from(w)))
-      // A pipe has no width. 100 keeps columns aligned in a log or a pasted
-      // snippet without wrapping in a default-size terminal.
-      .unwrap_or(100);
+            .ok()
+            .and_then(|v| v.trim().parse::<usize>().ok())
+            .filter(|w| *w > 0)
+            .or_else(|| terminal_size().map(|(Width(w), _)| usize::from(w)))
+            // A pipe has no width. 100 keeps columns aligned in a log or a pasted
+            // snippet without wrapping in a default-size terminal.
+            .unwrap_or(100);
 
         Layout::of(columns)
     }

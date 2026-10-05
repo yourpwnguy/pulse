@@ -1,4 +1,4 @@
-//! `Line` — text that knows its own display width.
+//! `Line`: text that knows its own display width.
 //!
 //! Every alignment bug in the reference implementation had the same shape:
 //! something measured a string that had already been coloured. Escape sequences
@@ -17,7 +17,7 @@
 
 use std::fmt;
 
-use unicode_width::UnicodeWidthStr;
+use unicode_width::{UnicodeWidthChar, UnicodeWidthStr};
 
 use super::style::{Colour, Style};
 
@@ -141,7 +141,7 @@ pub fn truncate(text: &str, cells: usize) -> String {
     let mut out = String::new();
     let mut used = 0;
     for ch in flat.chars() {
-        let w = UnicodeWidthStr::width(ch.to_string().as_str());
+        let w = ch.width().unwrap_or(0);
         if used + w > budget {
             break;
         }

@@ -1,9 +1,9 @@
 //! Machine-readable report.
 //!
 //! The [`Report`] type *is* the schema. There is no separate set of DTOs to keep
-//! in sync, because triage already produces flat, presentation-ready values —
-//! which is the reason `Finding` holds a `String` package name rather than a
-//! nested domain object.
+//! in sync, because triage already produces flat, presentation-ready values
+//! (which is the reason `Finding` holds a `String` package name rather than a
+//! nested domain object).
 
 use std::io::Write;
 
