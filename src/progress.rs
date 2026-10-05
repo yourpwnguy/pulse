@@ -1,4 +1,4 @@
-//! Progress across runs — real numbers only.
+//! Progress across runs: real numbers only.
 //!
 //! This module replaces an earlier XP/level/streak/badge system. That system was
 //! removed on purpose, and the reasoning is worth keeping written down because it
@@ -113,7 +113,7 @@ pub struct Headline {
     pub fixable: usize,
     /// No patch exists; you are waiting on someone else.
     pub blocked: usize,
-    /// Needs a breaking change — a decision, not a command.
+    /// Needs a breaking change (a decision, not a command).
     pub needs_decision: usize,
     /// Highest CVSS score present, if any advisory carried one.
     pub worst_score: Option<f64>,

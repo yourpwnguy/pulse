@@ -163,8 +163,8 @@ impl Severity {
 ///
 /// Implements the specification's base-score equations directly, including the
 /// v3.1 `Roundup`. Returns `None` for anything that is not a well-formed v3.x
-/// vector with all eight base metrics present — notably CVSS v4.0, whose
-/// scoring is a large interpolation table we deliberately do not implement.
+/// vector with all eight base metrics present (notably CVSS v4.0, whose
+/// scoring is a large interpolation table we deliberately do not implement).
 /// Refusing to score is better than inventing a number.
 pub fn cvss3_base_score(vector: &str) -> Option<f64> {
     let mut parts = vector.split('/');
@@ -277,7 +277,7 @@ pub fn cvss3_base_score(vector: &str) -> Option<f64> {
 
 /// The CVSS v3.1 `Roundup` function: the smallest one-decimal value greater
 /// than or equal to the input. Integer arithmetic, because the specification
-/// says so — naive `(x * 10).ceil() / 10.0` gives the wrong answer for inputs
+/// says so: naive `(x * 10).ceil() / 10.0` gives the wrong answer for inputs
 /// that floating point represents just below an exact tenth.
 fn roundup(input: f64) -> f64 {
     let scaled = (input * 100_000.0).round() as i64;

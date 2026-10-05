@@ -2,7 +2,7 @@
 //!
 //! Counts everything the caller needs in one pass: how many findings per
 //! bucket, per severity, how many are direct, how many are quick wins, and
-//! the genuinely alarming count — high or critical with no patch.
+//! the genuinely alarming count (high or critical with no patch).
 
 use crate::domain::{Effort, Project, Rating};
 

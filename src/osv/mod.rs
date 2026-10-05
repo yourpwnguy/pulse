@@ -6,9 +6,9 @@
 //! pure.
 //!
 //! Because this module is the only impure part of the pipeline, no trait is
-//! needed to make the rest of the program testable — the pure functions can be
+//! needed to make the rest of the program testable (the pure functions can be
 //! called with hand-built values directly. That is why v0.1.0 has no
-//! `AdvisorySource` trait with exactly one implementation.
+//! `AdvisorySource` trait with exactly one implementation).
 
 pub mod cache;
 mod wire;
@@ -71,7 +71,7 @@ impl Client {
         reporter.begin(Stage::Query);
 
         // The batch cache is keyed on the exact package set, so it is only reused
-        // for an identical query. Its ttl is deliberately short — see `cache`.
+        // for an identical query. Its ttl is deliberately short (see `cache`).
         let keys: Vec<String> = packages
             .iter()
             .map(|p| format!("{}@{}", p.name, p.version))

@@ -5,7 +5,7 @@
 //! to schedule at all.
 //!
 //! `prioritise()` and `explain()` are kept next to each other so the two
-//! cannot drift apart — if the policy changes, the explanation changes with it.
+//! cannot drift apart (if the policy changes, the explanation changes with it).
 //!
 //! ## Why this ordering matters
 //!

@@ -1,10 +1,10 @@
 //! Progress state, persisted between runs.
 //!
 //! This reverses a decision made earlier in the rewrite, and the distinction
-//! matters. The reference implementation persisted the *dependency index* — a
+//! matters. The reference implementation persisted the *dependency index* (a
 //! copy of data that lives in the lockfile, which went stale the moment anyone
 //! ran `cargo update`, and which could therefore report findings for a tree that
-//! no longer existed. That was a cache pretending to be a source of truth.
+//! no longer existed). That was a cache pretending to be a source of truth.
 //!
 //! This file stores something the lockfile cannot: **what the user has already
 //! seen and already fixed.** That is genuinely new information, it cannot be

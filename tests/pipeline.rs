@@ -1,7 +1,7 @@
 //! End-to-end tests over the pure pipeline.
 //!
-//! These drive the real code path — discovery, parsing, graph construction,
-//! correlation, triage, rendering — with the network replaced by hand-built
+//! These drive the real code path (discovery, parsing, graph construction,
+//! correlation, triage, rendering) with the network replaced by hand-built
 //! advisories. No mocking framework and no trait indirection is required,
 //! because the only impure step ([`pulse::osv::Client`]) is a separate leaf
 //! module rather than something threaded through the logic.
@@ -158,8 +158,8 @@ fn direct_dependency_of_a_second_project_is_reported_separately() {
     assert_eq!(report.summary.projects, 2);
     assert_eq!(report.findings.len(), 2);
 
-    // Same advisory, same package, different ownership — and the direct one
-    // sorts first because it is the cheaper fix.
+    // Same advisory, same package, different ownership (and the direct one
+    // sorts first because it is the cheaper fix).
     assert_eq!(report.findings[0].project, "inner-app");
     assert!(report.findings[0].origin.is_direct());
     assert!(report.findings[0].rationale.contains("bump yourself"));

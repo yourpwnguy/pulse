@@ -187,7 +187,7 @@ mod tests {
     fn resolves_fix_from_the_containing_interval() {
         let range = rustsec_2020_0071();
 
-        // A 0.1.x user's real fix is 0.2.0 — the bound of *their* interval.
+        // A 0.1.x user's real fix is 0.2.0 (the bound of *their* interval).
         assert_eq!(range.fix_for(&v("0.1.44")), Some(&v("0.2.0")));
         // A 0.2.7 user's real fix is 0.2.23, NOT the advisory's first `fixed`.
         assert_eq!(range.fix_for(&v("0.2.7")), Some(&v("0.2.23")));

@@ -1,8 +1,8 @@
 //! Triage: turning matches into decisions.
 //!
 //! This is the module that justifies the program's existence. Finding that
-//! `time 0.1.44` has an advisory is a solved problem — OSV gives it away and
-//! `cargo audit` has done it for years. The unsolved problem is what a person
+//! `time 0.1.44` has an advisory is a solved problem (OSV gives it away and
+//! `cargo audit` has done it for years). The unsolved problem is what a person
 //! does on Monday morning with forty repositories and two hundred matches.
 //!
 //! So the output here is not a list of vulnerabilities, and explicitly not a

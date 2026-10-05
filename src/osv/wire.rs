@@ -1,7 +1,7 @@
 //! OSV wire format, and the pure mapping from it into the domain.
 //!
 //! Every type in here is private to the [`crate::osv`] module. The rest of the
-//! crate never sees OSV's nested JSON — it sees [`Advisory`]. That boundary is
+//! crate never sees OSV's nested JSON (it sees [`Advisory`]). That boundary is
 //! the one genuinely good abstraction in the reference implementation and it is
 //! kept.
 //!

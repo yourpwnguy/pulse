@@ -31,7 +31,7 @@ pub enum Priority {
     /// No patched release. Upgrading is not an option; watch upstream, mitigate,
     /// or drop the dependency.
     Monitor,
-    /// Not an exploitable defect — an unmaintained or yanked notice. Kept
+    /// Not an exploitable defect (an unmaintained or yanked notice). Kept
     /// because it is useful, separated because calling it a vulnerability makes
     /// the whole report untrustworthy.
     Note,
@@ -110,9 +110,9 @@ pub struct Finding {
     pub effort: Option<crate::domain::Effort>,
     /// The exact command or edit that resolves this. `None` when nothing to do.
     pub remediation: Option<String>,
-    /// Symbols the advisory says are affected. Not a reachability *claim* — a
+    /// Symbols the advisory says are affected. Not a reachability *claim* (a
     /// starting point for `grep`, and the honest limit of what a lockfile scanner
-    /// can know without call-graph analysis.
+    /// can know without call-graph analysis).
     pub affected_functions: Vec<String>,
     pub priority: Priority,
     /// Why this finding landed in this bucket.
@@ -149,7 +149,7 @@ pub struct Summary {
     pub unpatchable_severe: usize,
     /// Findings in dependencies the project declares itself, and can fix alone.
     pub direct: usize,
-    /// Findings resolvable by a semver-compatible bump — the quick wins.
+    /// Findings resolvable by a semver-compatible bump (the quick wins).
     pub quick_wins: usize,
 }
 

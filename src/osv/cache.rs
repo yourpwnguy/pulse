@@ -9,7 +9,7 @@
 //! | what | ttl | why |
 //! |---|---|---|
 //! | advisory **bodies**, by id | 7 days | the text of a published advisory is effectively immutable; a stale copy costs a slightly wrong summary at worst |
-//! | **which packages match**, by package-set | 1 hour | this is the part that goes dangerously stale — a new disclosure must show up promptly |
+//! | **which packages match**, by package-set | 1 hour | this is the part that goes dangerously stale (a new disclosure must show up promptly) |
 //!
 //! The short TTL on match results is the important decision. A day-long cache
 //! would make the tool fast and quietly wrong, which for a security tool is worse
@@ -177,10 +177,10 @@ fn is_safe_key(key: &str) -> bool {
 /// A stable digest of the package set, so the batch cache is only reused for an
 /// identical query.
 ///
-/// FNV-1a over the sorted `name@version` list. Not cryptographic — a collision
+/// FNV-1a over the sorted `name@version` list. Not cryptographic (a collision
 /// would show the wrong cached matches, so it is 128 bits of two independently
 /// seeded passes to make that vanishingly unlikely without pulling in a hash
-/// crate.
+/// crate).
 pub fn digest(keys: &[String]) -> String {
     let mut sorted: Vec<&String> = keys.iter().collect();
     sorted.sort();
@@ -295,8 +295,8 @@ mod tests {
             stored_at: now() + 10_000,
             value: 1,
         };
-        // saturating_sub yields 0, which is "just written" — acceptable, and
-        // crucially it expires normally once the clock catches up.
+        // saturating_sub yields 0, which is "just written" (acceptable, and
+        // crucially it expires normally once the clock catches up).
         assert!(skewed.fresh(MATCH_TTL));
     }
 

@@ -36,7 +36,7 @@ struct LockPackage {
 impl LockPackage {
     /// Local code: a workspace member or a path dependency.
     ///
-    /// `Cargo.lock` cannot tell these apart — neither has a `source` — but the
+    /// `Cargo.lock` cannot tell these apart (neither has a `source`), but the
     /// distinction does not matter here, because both are the user's own code
     /// rather than a third-party dependency, and neither has registry
     /// coordinates to look up.
