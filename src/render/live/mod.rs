@@ -12,7 +12,7 @@
 //! ## Invariants
 //!
 //! * **Fixed height.** The region is [`REGION`] rows and every frame is padded to
-//!   exactly that. Frames that grow silently lose their bottom rows — that is how
+//!   exactly that. Frames that grow silently lose their bottom rows (that is how
 //!   a completed stage ends up with no tick against it.
 //! * **stderr only.** `pulse -o json > out.json` must stay clean.
 //! * **Inert when redirected.** A CI log should not collect 300 frames.
@@ -84,8 +84,6 @@ impl Stage {
         }
     }
 
-    /// Doki's expression while this stage runs, so the mascot's behaviour tracks
-    /// the work rather than looping independently of it.
     /// What Doki says while this stage runs.
     ///
     /// First person, curious, never technical for its own sake. The tool is doing
@@ -100,11 +98,13 @@ impl Stage {
             Stage::Fetch => "pulling the advisories down…",
             Stage::Score => "doing the cvss arithmetic…",
             Stage::Resolve => "checking which versions actually fix it…",
-            Stage::Merge => "same bug, two databases — merging…",
+            Stage::Merge => "same bug, two databases \u{2014} merging…",
             Stage::Triage => "sorting by what is worth your time…",
         }
     }
 
+    /// Doki's expression while this stage runs, so the mascot's behaviour tracks
+    /// the work rather than looping independently of it.
     const fn mood(self) -> Mood {
         match self {
             Stage::Discover => Mood::Sniff,
@@ -171,8 +171,8 @@ impl Reporter {
     /// Holds the current stage on screen for at least [`DWELL`].
     ///
     /// Without this, a warm cache finishes nine stages in about two milliseconds and
-    /// the entire narration is a single flicker — all the work, none of the sense
-    /// that anything happened. Pacing is a deliberate cost: roughly a third of a
+    /// the entire narration is a single flicker (all the work, none of the sense
+    /// that anything happened). Pacing is a deliberate cost: roughly a third of a
     /// second per stage, only when someone is watching.
     ///
     /// A no-op when the animation is inert, so scripts and CI pay nothing.
