@@ -8,13 +8,9 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within Pulse, please send an email to [your email]. All security vulnerabilities will be promptly addressed.
+Report vulnerabilities through [GitHub's private vulnerability reporting](../../security/advisories/new). That keeps the report linked to the code, notifies maintainers directly, and lets us fix it before anything goes public. Use a private advisory, not a public issue, so the details stay hidden until a fix is out.
 
-**Please do not report security vulnerabilities through public GitHub issues.**
-
-Instead, please report them via email to [security@example.com].
-
-You should receive a response within 48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
+You should receive a response within 48 hours. If for some reason you do not, please follow up on the advisory to ensure we received your original message.
 
 Please include the following information in your report:
 
