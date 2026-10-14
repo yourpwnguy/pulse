@@ -27,7 +27,7 @@
 use super::layout::Layout;
 use super::line::{truncate, Line};
 use super::mascot;
-use super::style::{Colour, Style, CORAL, FAINT, GOLD, IRIS, MINT, PETAL, ROSE, SKY, SLATE};
+use super::style::{Colour, Style, FAINT, GOLD, IRIS, MINT, PETAL, ROSE, SLATE};
 
 /// Widest the board is ever drawn. Beyond this it stops looking dense.
 const MAX: usize = 82;
@@ -211,7 +211,7 @@ impl Board {
 /// Convenience constructors so callers do not repeat the colour choices, and so
 /// the same figure is always the same colour wherever it appears.
 pub mod stat {
-    use super::{Colour, Stat, CORAL, GOLD, IRIS, MINT, SKY, SLATE};
+    use super::{Colour, Stat, GOLD, IRIS, MINT, SLATE};
 
     pub fn issues(count: usize, worst: Colour) -> Stat {
         Stat::new(
@@ -254,19 +254,12 @@ pub mod stat {
     pub fn unrated(count: usize) -> Stat {
         Stat::new(format!("{count} unrated"), SLATE)
     }
-
-    pub fn critical(count: usize) -> Stat {
-        Stat::new(format!("{count} critical"), CORAL)
-    }
-
-    pub fn packages(count: usize) -> Stat {
-        Stat::new(format!("{count} packages"), SKY)
-    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::render::style::CORAL;
     use unicode_width::UnicodeWidthStr;
 
     fn board(layout: Layout) -> Board {

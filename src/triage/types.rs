@@ -46,16 +46,6 @@ impl Priority {
             Priority::Note => "note",
         }
     }
-
-    /// One-line explanation of the bucket, printed as a section heading.
-    pub fn describe(self) -> &'static str {
-        match self {
-            Priority::Act => "patch available, high impact",
-            Priority::Plan => "patch available, lower impact",
-            Priority::Monitor => "no patch available",
-            Priority::Note => "informational, not an exploitable defect",
-        }
-    }
 }
 
 /// Whether a patched release exists for the version in use.
