@@ -437,9 +437,10 @@ an SBOM generator, a web dashboard.
 ## 9 · Repository layout
 
 ```
-v0.1.0/
+pulse/
 ├── Cargo.toml                  self-contained workspace
-├── ARCHITECTURE.md
+├── docs/
+│   └── ARCHITECTURE.md
 └── src/
     ├── main.rs                 imperative shell: args → exit code
     ├── lib.rs                  run(): the pipeline in one readable sequence
