@@ -11,8 +11,8 @@ keywords = ["security", "vulnerability", "dependencies", "cargo", "audit"]
 categories = ["command-line-utilities", "development-tools"]
 
 
-# Self-contained workspace so this crate builds independently of the
-# reference implementation living in the parent directory.
+# Standalone workspace: this crate is the entire build, and the empty table
+# keeps Cargo from walking up and adopting a workspace above this repo.
 [workspace]
 
 [dependencies]
